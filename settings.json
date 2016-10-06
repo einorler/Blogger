@@ -1,10 +1,11 @@
 [
-{"count":7,"date":"2016-10-06T10:39:02+0000"},
+{"count":8,"date":"2016-10-06T11:17:53+0000"},
 {"_type":"setting","_id":"AVeY55aB7FG0uL66DocF","_source":{"name":"comments_likes","description":"Enables the display of likes in comments","profile":["comments"],"type":"bool","value":"1","created_at":"2016-10-06T07:31:36+0000"}},
 {"_type":"setting","_id":"AVeY6cvJ7FG0uL66DocG","_source":{"name":"comments_disable_anonymous","description":"Disables writing comments if a user is not logged in","profile":["comments"],"type":"bool","value":"1","created_at":"2016-10-06T07:34:01+0000"}},
 {"_type":"setting","_id":"AVeZDZen7FG0uL66DocP","_source":{"name":"content_disable_premium_categories","description":"Disables premium categories to anonymous users","profile":["content"],"type":"bool","value":"1","created_at":"2016-10-06T08:13:07+0000"}},
-{"_type":"setting","_id":"AVeOjStl7FG0uL66Doai","_source":{"name":"ongr_active_profiles","profile":[],"type":"hidden","value":["comments","content"],"created_at":"2016-10-04T07:16:38+0000"}},
 {"_type":"setting","_id":"AVeY5fBX7FG0uL66DocD","_source":{"name":"comments_title","description":"Shows a comment count near the title of an article when enabled","profile":["comments"],"type":"bool","value":"1","created_at":"2016-10-06T07:29:48+0000"}},
-{"_type":"setting","_id":"AVeZPo7j7FG0uL66DocT","_source":{"name":"sdfsdf","profile":["default"],"type":"bool","value":0,"created_at":"2016-10-06T09:06:36+0000"}},
+{"_type":"setting","_id":"AVeZoDn57FG0uL66DocX","_source":{"name":"commerce_category_banner","profile":["commerce"],"type":"bool","value":"1","created_at":"2016-10-06T10:53:17+0000"}},
+{"_type":"setting","_id":"AVeOjStl7FG0uL66Doai","_source":{"name":"ongr_active_profiles","profile":[],"type":"hidden","value":["content","comments","commerce"],"created_at":"2016-10-04T07:16:38+0000"}},
+{"_type":"setting","_id":"AVeZoMmI7FG0uL66DocY","_source":{"name":"commerce_category_banner_name","description":"","profile":["comments"],"type":"string","value":"images\/banners\/4.jpeg","created_at":"2016-10-06T10:53:53+0000"}},
 {"_type":"setting","_id":"AVeY5t1k7FG0uL66DocE","_source":{"name":"comments_main","description":"Enables the display of comments under the Article","profile":["comments"],"type":"bool","value":"1","created_at":"2016-10-06T07:30:49+0000"}}
 ]
