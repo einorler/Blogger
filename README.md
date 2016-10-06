@@ -22,3 +22,8 @@ To install just run these commands:
   * `bin/console doctrine:database:create`
   * `bin/console doctrine:schema:update --force`
   * Finally, import the `dump.sql` to your database and you are ready
+
+Two users should now be configured:
+ 
+  * username: `test`, password: `test`
+  * username: `admin`, password: `admin`
