@@ -47,6 +47,12 @@
                 </div>
             {% endfor %}
         </div>
+
+        {% if ongr_setting('commerce_category_banner') %}
+            <div class="col-md-5 content-right">
+                <img src="{{ asset(ongr_setting('commerce_category_banner_name')) }}"style="width: 100%" alt="">
+            </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
