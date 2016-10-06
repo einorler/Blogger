@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+
+    <div class="header-bottom">
+        <div class="type">
+            <h5>Categories</h5>
+        </div>
+        <span class="menu"></span>
+        <div class="list-nav">
+            <ul>
+                {% for category in categories %}
+                    <li><a href="{{ path(category) }}">{{ category.name }}</a></li>|
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- script for menu -->
+        <script>
+            $( "span.menu" ).click(function() {
+                $( ".list-nav" ).slideToggle( "slow", function() {
+                    // Animation complete.
+                });
+            });
+        </script>
+        <!-- script for menu -->
+
+        <div class="clearfix"></div>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="content">
+        <div class="col-md-7 content-left">
+            <h5 class="head">News</h5>
+            {% for article in filters.result %}
+                <div class="article">
+                    <h6> {{ article.author }} </h6>
+                    <a class="title" href="{{ path(article) }}">{{ article.title }}
+                        {% if ongr_setting('comments_title') %}
+                            <span>({{ article.comments | length}})</span>
+                        {% endif %}
+                    </a>
+                    <a href="{{ path(article) }}"><img src="{{ asset('images/' ~ article.image) }}" alt="" /></a>
+                    <p>{{ article.content|slice(0, 500) }}...</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

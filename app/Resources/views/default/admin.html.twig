@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+
+    <div class="header-bottom">
+        <div class="type">
+            <h5>Actions</h5>
+        </div>
+        <span class="menu"></span>
+        <div class="list-nav">
+            <ul>
+                <li><a href="/admin/settings">Settings Management</a></li>|
+                <li><a href="{{ path('newArticle') }}">Write An Article</a></li>|
+            </ul>
+        </div>
+        <!-- script for menu -->
+        <script>
+            $( "span.menu" ).click(function() {
+                $( ".list-nav" ).slideToggle( "slow", function() {
+                    // Animation complete.
+                });
+            });
+        </script>
+        <!-- script for menu -->
+
+        <div class="clearfix"></div>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="content">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 text-center">
+                <div class="article">
+                    <a class="title" href="/">Admin Pannel</a>
+                    <p>This project was introduced to test new functionality of the ONGR bundles. It is presented as a blog site with minimal admin functionality </p>
+                    <p>The content for the site is taken from numerous sites including 'techcrunch', '' and more...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

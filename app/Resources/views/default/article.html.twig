@@ -1,0 +1,190 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+
+    <div class="header-bottom">
+        <div class="type">
+            <h5>Categories</h5>
+        </div>
+        <span class="menu"></span>
+        <div class="list-nav">
+            <ul>
+                {% for category in categories %}
+                    {% if category.id == document.category %}
+                        {% set catName = category.name %}
+                    {% endif %}
+                    <li><a href="{{ path(category) }}">{{ category.name }}</a></li>|
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- script for menu -->
+        <script>
+            $( "span.menu" ).click(function() {
+                $( ".list-nav" ).slideToggle( "slow", function() {
+                    // Animation complete.
+                });
+            });
+        </script>
+        <!-- script for menu -->
+
+        <div class="clearfix"></div>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="content">
+            <div class="single-page">
+                <div class="print-main">
+                    <h3>
+                        {% for category in categories %}
+                            {% if category.id == document.category %}
+                                {{ category.name }}
+                            {% endif %}
+                        {% endfor %}
+                    </h3>
+                    <a href="">{{ document.title }}
+                        {% if ongr_setting('comments_title') %}
+                            <span>({{ document.comments | length}})</span>
+                        {% endif %}
+                    </a>
+                    <p class="sub_head">Posted by <a href="#">{{ document.author }}</a> on {{ document.createdAt.format('Y-m-d') }}</p>
+                    <a href=""><img src="{{ asset('images/'~document.image) }}" class="img-responsive" alt="" /></a>
+                    <p class="span"><a href="#">Article </a> |  on {{ document.createdAt.format('M d, Y') }}</p>
+                    <p class="ptext">{{ document.content }}</p>
+                </div>
+
+            </div>
+            <div class="col-md-7 single-content-left">
+                {% if ongr_setting('comments_main') %}
+                    <div class="single">
+                        <div class="comments1">
+                            <h4>COMMENTS</h4>
+                            {% if document.comments is not empty %}
+                                {% for comment in document.comments %}
+                                    <div class="comments-main">
+                                        <div class="col-md-3 cmts-main-left">
+                                            <img src="{{ asset('images/avatar.jpg')}}" alt="">
+                                        </div>
+                                        <div class="col-md-9 cmts-main-right">
+                                            <h5>{{ comment.commenter }}</h5>
+                                            <p>{{ comment.comment }}</p>
+                                            <div class="cmts">
+                                                <div class="col-md-5 cmnts-left">
+                                                    <p>On {{ comment.date.format('M d, Y, H:i') }}</p>
+                                                </div>
+                                                {% if ongr_setting('comments_likes') %}
+                                                    <div class="col-md-3 cmnts-left">
+                                                        <p>Likes: {{ comment.likes }}</p>
+                                                    </div>
+                                                    <div class="col-md-4 cmnts-right">
+                                                        <a href="
+                                                            {{ path('commentLike', {'article' : document.id, 'comment' : comment.number}) }}
+                                                        ">Like!</a>
+                                                    </div>
+                                                {% endif %}
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="editor">
+                                    <p>There are no comments. Be the first one!</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="leave">
+                            <h4>Leave a comment</h4>
+                        </div>
+                        {% if ongr_setting('comments_disable_anonymous') %}
+                            {% if is_granted('ROLE_USER') %}
+                                {% if error is not empty and error %}
+                                    <div class="container col-md-6">
+                                        <div class="alert alert-danger">
+                                            <strong>Error!</strong> There was an error saving the data.
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <form id="commentform" action="{{ path('commentAdd') }}" method="post">
+                                    <input type="text" name="article" class="hidden" value="{{ document.id }}">
+                                    <p class="comment-form-comment">
+                                        <label for="comment">Comment</label>
+                                        <textarea id="comment" name="comment"></textarea>
+                                    </p>
+                                    <div class="clearfix"></div>
+                                    <p class="form-submit">
+                                        <input name="submit" type="submit" id="submit" value="Send">
+                                    </p>
+                                    <div class="clearfix"></div>
+                                </form>
+                            {% else %}
+                                <div class="editor">
+                                    <p>Sign in to write a comment</p>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            {% if error is not empty and error %}
+                                <div class="container col-md-6">
+                                    <div class="alert alert-danger">
+                                        <strong>Error!</strong> There was an error saving the data.
+                                    </div>
+                                </div>
+                            {% endif %}
+                            <form id="commentform" action="{{ path('commentAdd') }}" method="post">
+                                <input type="text" name="article" class="hidden" value="{{ document.id }}">
+                                <p class="comment-form-comment">
+                                    <label for="comment">Comment</label>
+                                    <textarea id="comment" name="comment"></textarea>
+                                </p>
+                                <div class="clearfix"></div>
+                                <p class="form-submit">
+                                    <input name="submit" type="submit" id="submit" value="Send">
+                                </p>
+                                <div class="clearfix"></div>
+                            </form>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-5 content-right content-right-top">
+                <h5 class="head">Popular</h5>
+                <a href="single.html">
+                    <div class="editor text-center">
+                        <h3>DeltaMaker – The new kid on the block An Elegant 3D Printer</h3>
+                        <p>A new cheap ass 3D Printer worth checking out</p>
+                        <label>2 Days Ago</label>
+                        <span></span>
+                    </div>
+                </a>
+                <a class="active" href="single.html">
+                    <div class="editor text-center">
+                        <h3>Software Review: Autodesk Inventor Fusion for Mac</h3>
+                        <p>3D Printing, 3D Software</p>
+                        <label>3 Days Ago</label>
+                        <span></span>
+                    </div>
+                </a>
+                <a href="single.html">
+                    <div class="editor text-center">
+                        <h3>DeltaMaker – The new kid on the block An Elegant 3D Printer</h3>
+                        <p>A new cheap ass 3D Printer worth checking out</p>
+                        <label>2 Days Ago</label>
+                        <span></span>
+                    </div>
+                </a>
+                <a href="single.html">
+                    <div class="editor text-center">
+                        <h3>Software Review: Autodesk Inventor Fusion for Mac</h3>
+                        <p>3D Printing, 3D Software</p>
+                        <label>3 Days Ago</label>
+                        <span></span>
+                    </div>
+                </a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block header %}
+
+    <div class="header-bottom">
+        <div class="type">
+            <h5>Actions</h5>
+        </div>
+        <span class="menu"></span>
+        <div class="list-nav">
+            <ul>
+                <li><a href="/admin/settings">Settings Management</a></li>|
+                <li><a href="{{ path('newArticle') }}">Write An Article</a></li>|
+            </ul>
+        </div>
+        <!-- script for menu -->
+        <script>
+            $( "span.menu" ).click(function() {
+                $( ".list-nav" ).slideToggle( "slow", function() {
+                    // Animation complete.
+                });
+            });
+        </script>
+        <!-- script for menu -->
+
+        <div class="clearfix"></div>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="content">
+            <div class="col-md-8">
+                <div class="article">
+                    <a class="title" href="/">New Article</a>
+
+                    {% if error %}
+                        <div class="container col-md-6">
+                            <div class="alert alert-danger">
+                                <strong>Error!</strong> There was an error saving the data.
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if success %}
+                        <div class="container col-md-6">
+                            <div class="alert alert-success">
+                                <strong>Success!</strong> The article was saved successfully.
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <form action="{{ path('handleArticle') }}" method="post" class="col-md-8" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" id="title" name="title">
+                        </div>
+                        <div class="form-group">
+                            <label for="author">Author</label>
+                            <input type="text" class="form-control" id="author" name="author">
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select class="form-control" id="category" name="category">
+                                {% for key, category in categories %}
+                                    <option value="{{ key }}">{{ category }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="text">Text</label>
+                            <textarea class="form-control" id="text" name="text" rows="10"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Image</label>
+                            <input type="file" class="form-control-file" id="image" name="image" aria-describedby="fileHelp">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

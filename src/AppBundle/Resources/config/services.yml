@@ -1,0 +1,8 @@
+services:
+    app.article_handler:
+        class: AppBundle\Service\ArticleHandler
+        arguments: ["@es.manager.default.article", "%kernel.root_dir%"]
+
+    app.category_handler:
+        class: AppBundle\Service\CategoryHandler
+        arguments: ["@es.manager.default.category"]

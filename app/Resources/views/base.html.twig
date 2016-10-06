@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Blogger{% endblock %}</title>
+        <link href="{{ asset('css/bootstrap.css') }}" rel='stylesheet' type='text/css' />
+        <!-- Custom Theme files -->
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
+        <!-- Custom Theme files -->
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <!-- Custom Theme files -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="keywords" content="Konstructs Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+        <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    </head>
+    <body>
+        <!-- header-section-starts -->
+        <div class="header">
+            <div class="container">
+                <div class="logo">
+                    <a href="{{ path('homepage') }}"><h1>blogger</h1></a>
+                </div>
+                <div class="pages">
+                    <ul>
+                        <li><a class="
+                            {% set route = app.request.attributes.get('_route') %}
+                            {% if route == 'ongr_route_category' or
+                                  route == 'articles' or
+                                  route == 'ongr_route_article' %}
+                                active
+                            {% endif %}
+                            " href="{{ path('articles') }}">Articles</a></li>
+                    </ul>
+                </div>
+                <div class="navigation">
+                    <ul>
+                        {#<li><a href="contact.html">Advertise</a></li>#}
+                        {#<li><a href="about.html">About Us</a></li>#}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li><a href="{{ path('admin') }}">Admin panel</a></li>
+                        {% endif %}
+                        {% if is_granted('ROLE_USER')%}
+                            <li><a class="active" href="/logout">Log out</a></li>
+                        {% else %}
+                            <li><a class="active" href="{{ path('fos_user_security_login') }}">Log in!</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <div class="container">
+            {% block header %}{% endblock %}
+        </div>
+            {% block body %}{% endblock %}
+            <div class="footer">
+                <div class="footer-top">
+                    <div class="container">
+                        <div class="col-md-3 footer-links">
+                            <h4>Other pages and things</h4>
+                            <a href="#">Design a creative Blog</a>
+                            <a href="#">Design a iPad Website</a>
+                            <a href="#">Single Page sales portfolio </a>
+                            <a href="#">Flat product website in Photoshop</a>
+                            <a href="#">Design a creative Blog</a>
+                            <a href="#">Design a iPad Website</a>
+                            <a href="#">Single Page sales portfolio </a>
+                            <a href="#">Flat product website</a>
+                        </div>
+                        <div class="col-md-3 footer-links span_66">
+                            <a href="#">Flat product website in Photoshop</a>
+                            <a href="#">Design a creative Blog</a>
+                            <a href="#">Design a iPad Website </a>
+                        </div>
+                        <div class="col-md-3 footer-links">
+                            <h4>Relevant Articles</h4>
+                            <a href="#">Design a creative Blog</a>
+                            <a href="#">Design a iPad Website</a>
+                            <a href="#">Single Page sales portfolio </a>
+                            <a href="#">Flat product website</a>
+                            <a href="#">Design a creative Blog</a>
+                        </div>
+                        <div class="col-md-3 footer-links">
+                            <h4>Other pages and things</h4>
+                            <a href="#">Blaz Robar</a>
+                            <a href="#">Nick Toranto</a>
+                            <a href="#">Joisp Kelava</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="container">
+                        <div class="copyrights">
+                            <p>Konstructs © 2015 All rights reserved | Template by  <a href="http://w3layouts.com">  W3layouts</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

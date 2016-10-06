@@ -1,0 +1,21 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+
+# FOS JS bundle route map, if you have it already skip this one.
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+# ONGR settings management route map. You might want to secure it under some firewall.
+ongr_settings_private_routing:
+    resource: "@ONGRSettingsBundle/Resources/config/routing/management.yml"
+    prefix: admin/settings
+
+# Public routes for ONGR settings. Do not add them to the firewall unless you know what you are doing.
+ongr_settings_public_routing:
+    resource: "@ONGRSettingsBundle/Resources/config/routing/public.yml"
+    prefix: /s
+
+# app/config/routing.yml
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

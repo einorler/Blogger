@@ -1,0 +1,5 @@
+services:
+    ongr_filter_manager.filter.category:
+      class: AppBundle\Filter\Category
+      tags:
+        - { name: ongr_filter_manager.filter, filter_name: category }
