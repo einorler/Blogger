@@ -33,24 +33,21 @@
 <div class="container">
     <div class="content">
         <div class="col-md-7 content-left">
-            <h5 class="head">News</h5>
+            <h5 class="head">Search: {{ filters.filters['search'].state.value }}</h5>
             {% for article in filters.result %}
                 <div class="article">
-                    <h6> {{ article.author }} </h6>
                     <a class="title" href="{{ path(article) }}">{{ article.title }}
                         {% if ongr_setting('comments_title') %}
                             <span>({{ article.comments | length}})</span>
                         {% endif %}
                     </a>
-                    <a href="{{ path(article) }}"><img src="{{ asset('images/' ~ article.image) }}" alt="" /></a>
-                    <p>{{ article.content|slice(0, 500) }}...</p>
                 </div>
             {% endfor %}
         </div>
 
         {% if ongr_setting('commerce_category_banner') %}
-            <div class="col-md-5 content-right" style="border: 0px">
-                <img src="{{ asset(ongr_setting('commerce_category_banner_name')) }}"style="width: 100%; padding: 15px" alt="">
+            <div class="col-md-5 content-right">
+                <img src="{{ asset(ongr_setting('commerce_category_banner_name')) }}"style="width: 100%" alt="">
             </div>
         {% endif %}
     </div>
