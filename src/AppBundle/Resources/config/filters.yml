@@ -1,5 +1,14 @@
 services:
     ongr_filter_manager.filter.category:
-      class: AppBundle\Filter\Category
-      tags:
-        - { name: ongr_filter_manager.filter, filter_name: category }
+        class: AppBundle\Filter\Category
+        tags:
+            - { name: ongr_filter_manager.filter, filter_name: category }
+    ongr_filter_manager.filter.search:
+        class: AppBundle\Filter\Match
+        calls:
+            - [setRequestField, ['q']]
+            - [setField, ['title^5,author^2,content']]
+            - [setUser, ['@security.token_storage']]
+            - [setSettingsManager, ['@ongr_settings.settings_manager']]
+        tags:
+            - { name: ongr_filter_manager.filter, filter_name: search }

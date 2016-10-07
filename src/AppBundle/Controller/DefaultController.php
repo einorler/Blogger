@@ -2,12 +2,9 @@
 
 namespace AppBundle\Controller;
 
-use ONGR\ElasticsearchDSL\Query\MatchAllQuery;
-use ONGR\ElasticsearchDSL\Search;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use ONGR\ElasticsearchBundle\Collection\Collection;
 
 class DefaultController extends Controller
 {
@@ -34,18 +31,19 @@ class DefaultController extends Controller
         ]);
     }
 
-    private function deleteComments()
+    /**
+     * @Route("/search", name="search")
+     */
+    public function searchAction(Request $request)
     {
-        $repo = $this->get('es.manager.default.article');
-        $articles = $repo->findDocuments(new Search(new MatchAllQuery()));
+        $categories = $this->get('app.category_handler')->getCategories(
+            $this->get('ongr_settings.settings_manager')->getCachedValue('content_disable_premium_categories'),
+            $this->getUser()
+        );
 
-        foreach ($articles as $article) {
-            if ($article->getComments()) {
-                $article->setComments(new Collection());
-                $repo->getManager()->persist($article);
-            }
-        }
-
-        $repo->getManager()->commit();
+        return $this->render('default/search.html.twig', [
+            'categories' => $categories,
+            'filters' => $this->get('ongr_filter_manager.article')->handleRequest($request),
+        ]);
     }
 }

@@ -111,5 +111,6 @@ ongr_filter_manager:
         article:
             filters:
                 - category
+                - search
             repository: 'es.manager.default.article'
 

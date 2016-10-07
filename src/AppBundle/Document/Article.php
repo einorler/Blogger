@@ -78,6 +78,12 @@ class Article implements SeoAwareInterface
     private $likes;
 
     /**
+     * @var bool
+     * @ES\Property(type="boolean")
+     */
+    private $premium;
+
+    /**
      * @var Comment[]
      * @ES\Embedded(class="AppBundle:Comment", multiple=true)
      */
@@ -310,6 +316,25 @@ class Article implements SeoAwareInterface
     public function setAuthor($author)
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getPremium()
+    {
+        return $this->premium;
+    }
+
+    /**
+     * @param boolean $premium
+     * @return Article
+     */
+    public function setPremium($premium)
+    {
+        $this->premium = $premium;
 
         return $this;
     }
