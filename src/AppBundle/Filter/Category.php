@@ -33,6 +33,8 @@ class Category extends AbstractSingleValue
      */
     public function modifySearch(Search $search, FilterState $state = null, SearchRequest $request = null)
     {
-        $search->addPostFilter(new TermQuery('category', $state->getValue()->getId()));
+        if ($state->isActive()) {
+            $search->addPostFilter(new TermQuery('category', $state->getValue()->getId()));
+        }
     }
 }
